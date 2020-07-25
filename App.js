@@ -9,31 +9,66 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
+
 } from 'react-native';
 
 import Home from './App/containers/Home';
+import Anime from './App/containers/Anime'
 import { Provider as PaperProvider } from 'react-native-paper';
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  NavigationContainer, DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+
+const Stack = createStackNavigator();
+const scheme = useColorScheme();
+function NavStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#000',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ title: 'Home' }}
+      />
+
+      <Stack.Screen
+        name="Anime"
+        component={Anime}
+        options={{ title: 'Anime' }}
+      />
+
+    </Stack.Navigator>
+  );
+}
 
 const App = () => {
   return (
     <>
-      <PaperProvider>
-        <SafeAreaView>
-          <Home />
-        </SafeAreaView>
-      </PaperProvider>
+      <AppearanceProvider>
+        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <NavStack />
+          {/* <PaperProvider>
+          <SafeAreaView>
+            
+          </SafeAreaView>
+        </PaperProvider> */}
+        </NavigationContainer>
+      </AppearanceProvider>
+
+
 
     </>
   );
