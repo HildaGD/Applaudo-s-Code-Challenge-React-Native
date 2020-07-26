@@ -20,10 +20,10 @@ import {
   DarkTheme,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+// import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 const Stack = createStackNavigator();
-const scheme = useColorScheme();
+// const scheme = useColorScheme();
 function NavStack() {
   return (
     <Stack.Navigator
@@ -57,17 +57,17 @@ function NavStack() {
 const App = () => {
   return (
     <>
-      <AppearanceProvider>
-        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <NavStack />
-          {/* <PaperProvider>
+      {/* <AppearanceProvider>
+        theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
+      </AppearanceProvider> */}
+      <NavigationContainer >
+        <NavStack />
+        {/* <PaperProvider>
           <SafeAreaView>
             
           </SafeAreaView>
         </PaperProvider> */}
-        </NavigationContainer>
-      </AppearanceProvider>
-
+      </NavigationContainer>
 
 
     </>

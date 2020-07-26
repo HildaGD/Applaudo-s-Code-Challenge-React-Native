@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions, } from 'react-native';
+
+const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -10,16 +12,21 @@ const styles = StyleSheet.create({
     height: 150
 ,
   },
+  medium:{
+    width: 150,
+    height: 250
+  },
   logo: {
     width: 66,
     height: 58,
   },
-  container: {
+  containerAnime: {
     flex: 1,
+    backgroundColor: '#000'
     //marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#000',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -28,6 +35,25 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
+
+  video: {
+    flex: 1,
+    height: height / 3,
+    width: width,
+    backgroundColor: '#000',
+  },
+  label: {
+    fontSize: 16,
+    color: '#fff',
+  },
+  labelSubtitle:{
+    fontSize: 14,
+    color: '#fff',
+  },
+  title:{
+    fontSize: 20,
+    color: '#fff',
+  }
 });
 
 export default styles
