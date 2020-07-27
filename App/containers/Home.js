@@ -1,14 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, FlatList, TouchableOpacity, SectionList } from 'react-native';
-import getAnime from '../services/getInfo'
+import { View, Text, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import searchAnime from '../services/searchAnime'
 import getCategory from '../services/getCategories'
 import listCategories from './listCategories'
-import { Searchbar } from 'react-native-paper';
-
 import styles from './styles'
-
+//import { Searchbar } from 'react-native-paper';
+import { SearchBar } from 'react-native-elements';
 function Home({ navigation }) {
     const [adventure, setAdventure] = useState([]);
     const [comedy, setComedy] = useState([]);
@@ -17,50 +15,47 @@ function Home({ navigation }) {
     const [kids, setKids] = useState([]);
     const [drama, setDrama] = useState([]);
     const [searchQuery, setSearchQuery] = React.useState('');
-    const [selectedId, setSelectedId] = useState(null);
+    const [showSearch, setShowSearch] = useState(false);
+    const [listSearch, setListSearch] = useState([])
 
-    const onChangeSearch = query => setSearchQuery(query);
 
-    useEffect(() => { //did mount
+    useEffect(() => {
         listAnime()
+
+
+
     }, []);
 
     async function listAnime() {
-        const categoryAdventure = await getCategory('Adventure')
-        const categoryComedy = await getCategory('Comedy')
-        const categoryAction = await getCategory('Action')
-        const categoryParody = await getCategory('Parody')
-        const categoryKids = await getCategory('Adventure')
-        const categoryDrama = await getCategory('Drama')
-        setAdventure(categoryAdventure.data)
-        setComedy(categoryComedy.data)
-        setAction(categoryAction.data)
-        setParody(categoryParody.data)
-        setKids(categoryKids.data)
-        setDrama(categoryDrama.data)
+        try {
+            const categoryAdventure = await getCategory('Adventure')
+            const categoryComedy = await getCategory('Comedy')
+            const categoryAction = await getCategory('Action')
+            const categoryParody = await getCategory('Parody')
+            const categoryKids = await getCategory('Adventure')
+            const categoryDrama = await getCategory('Drama')
+            setAdventure(categoryAdventure.data)
+            setComedy(categoryComedy.data)
+            setAction(categoryAction.data)
+            setParody(categoryParody.data)
+            setKids(categoryKids.data)
+            setDrama(categoryDrama.data)
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
-    async function lookUpAnime(query) {
-
-        setSearchQuery(query)
-        const search = searchAnime(searchQuery)
-
-        console.log('anime encontrado', search)
-    }
 
     const renderItem = ({ item }) => (
         <Item  {...item} />
     );
 
-
     function Item(props) {
-
-
         return (
             <View style={styles.item}>
-
-
                 <TouchableOpacity onPress={() => navigation.navigate('Anime', { props })}>
+
                     <Image
                         style={styles.tiny}
                         source={{
@@ -69,9 +64,6 @@ function Home({ navigation }) {
                     />
 
                 </TouchableOpacity>
-
-
-                {/* <Text style={style.title}>{title}</Text> */}
             </View>
         )
     }
@@ -103,18 +95,51 @@ function Home({ navigation }) {
     }
 
 
+    const onChangeSearch = query => {
+        setSearchQuery(query)
+        updateSearch()
+        setShowSearch(true)
+        console.log(query)
+    }
+
+    async function updateSearch() {
+        //setSearchQuery(search)
+        const searchList = await searchAnime(searchQuery)
+        setListSearch(searchList.data)
+
+        console.log('anime encontrado', listSearch)
+    };
+
+    function handleOnCleanSearchBar(){
+        setSearchQuery('')
+        setListSearch([])
+        setShowSearch(false)
+    }
+
+
     return (
 
         <View style={styles.containerAnime}>
 
-            <Searchbar
+            <SearchBar
                 placeholder="Search"
-                onChangeText={lookUpAnime}
+                onChangeText={onChangeSearch}
                 value={searchQuery}
+                onClear={handleOnCleanSearchBar}
+                showLoading = {true}
             />
-            <ScrollView>
 
-                {listCategories.map((item, index) => (
+            {
+                showSearch &&
+                <FlatList
+                    data={listSearch}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                />
+            }
+
+            <ScrollView>
+                {!showSearch && listCategories.map((item, index) => (
                     <View key={index}>
 
                         <Text style={{ color: '#fff', marginLeft: 20, fontSize: 18 }}>
@@ -131,14 +156,7 @@ function Home({ navigation }) {
 
                     </View>
                 ))}
-
-
-
-
-
-
             </ScrollView>
-
         </View>
 
     )

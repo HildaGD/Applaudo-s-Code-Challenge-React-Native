@@ -8,7 +8,8 @@ const searchAnime = (text) =>
         }
     })
         .then(response => {
-            console.log(response)
+            console.log('axios',text)
+           // console.log(response)
             return Promise.resolve(response.data)
         }).catch(error => {
             console.log(error)

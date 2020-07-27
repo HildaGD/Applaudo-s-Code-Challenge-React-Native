@@ -35,6 +35,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
+  row: {
+    fontSize: 18,
+    padding: 12,
+    color:'#fff'
+  },
+ 
+  textInput: {
+ 
+    textAlign: 'center',
+    height: 42,
+    borderWidth: 1,
+    borderColor: '#009688',
+    borderRadius: 8,
+    backgroundColor: "#FFFF"
+ 
+  },
 
   video: {
     flex: 1,
