@@ -2,6 +2,10 @@
 
 Libraries have been used
 
+YARN https://yarnpkg.com/lang/en/docs/install/
+
+REACT-NATIVE (React Native CLI Quickstart) https://reactnative.dev/docs/environment-setup
+
 KITSU API DOCS https://kitsu.docs.apiary.io/#introduction/json-api
 
 AXIOS https://github.com/axios/axios
