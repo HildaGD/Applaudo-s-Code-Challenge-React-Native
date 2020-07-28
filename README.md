@@ -9,3 +9,5 @@ REACT-NATIVE-WEBVIEW https://github.com/react-native-community/react-native-webv
 REACT-NATIVE-ELEMENTS https://react-native-elements.github.io/react-native-elements/docs/searchbar.html
 
 REACT-NATIVE-ASYNCSTORAGE https://react-native-community.github.io/async-storage/docs/install
+
+REACT-NAVIGATION https://reactnavigation.org/docs/getting-started
