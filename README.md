@@ -2,6 +2,8 @@
 
 Libraries have been used
 
+KITSU API DOCS https://kitsu.docs.apiary.io/#introduction/json-api
+
 AXIOS https://github.com/axios/axios
 
 REACT-NATIVE-WEBVIEW https://github.com/react-native-community/react-native-webview
