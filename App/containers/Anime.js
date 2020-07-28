@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, FlatList, Linking, TouchableOpacity } from 'react-native';
 import styles from './styles'
 import { WebView } from 'react-native-webview';
+import Bookmark from '../components/Bookmark'
 
 function Anime(props) {
     const [anime, setAnime] = useState([]);
@@ -62,12 +63,28 @@ function Anime(props) {
                     </View>
                 </View>
 
-                <View style={{ padding: 20 }}>
-                    <Text style={styles.label}>Genres</Text>
-                    <Text style={styles.label}>{props.route.params.props.attributes.subtype}</Text>
+                <View style={{ flexDirection: "row", padding: 20 }}>
+                    <View style={{ flex: 1 }}>
+                        <View style={{ padding: 10 }}>
+                            <Text style={styles.label}>Genres</Text>
+                            <Text style={styles.label}>{props.route.params.props.attributes.subtype}</Text>
+                        </View>
+
+                    </View>
+
+                    <View style={{ flex: 1 }}>
+                        <View style={{ padding: 10 }}>
+                            <Text style={styles.label}>Save in favorites</Text>
+                            <Bookmark {...props.route.params.props} />
+                        </View>
+                    </View>
+
+
                 </View>
 
+
                 <View style={{ flexDirection: "row", padding: 20 }}>
+
 
                     <View style={{ flex: 1 }}>
                         <View style={{ padding: 10 }}>

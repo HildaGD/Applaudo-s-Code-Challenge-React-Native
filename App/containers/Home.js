@@ -157,6 +157,9 @@ function Home({ navigation }) {
                     </View>
                 ))}
             </ScrollView>
+            <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
+                <Text style={styles.label}>Favorites</Text>
+            </TouchableOpacity>
         </View>
 
     )
