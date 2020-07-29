@@ -2,8 +2,14 @@
 
 Run project the next comands:
 
-cd android 
-gradlew clean && gradlew cleanBuildCache && adb reverse tcp:8081 tcp:8081 && adb devices
+For physical devices:
+
+
+cd android && gradlew clean && gradlew cleanBuildCache && adb reverse tcp:8081 tcp:8081 && adb devices
+
+cd ..
+
+npx react-native run-android
 
 Libraries have been used
 
