@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import searchAnime from '../services/searchAnime'
 import getCategory from '../services/getCategories'
 import listCategories from './listCategories'
@@ -17,7 +17,7 @@ function Home({ navigation }) {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [listSearch, setListSearch] = useState([])
-
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         listAnime()
@@ -40,8 +40,10 @@ function Home({ navigation }) {
             setParody(categoryParody.data)
             setKids(categoryKids.data)
             setDrama(categoryDrama.data)
+            setLoading(false)
         } catch (error) {
             console.log(error)
+            setLoading(true)
         }
 
     }
@@ -110,7 +112,7 @@ function Home({ navigation }) {
         console.log('anime encontrado', listSearch)
     };
 
-    function handleOnCleanSearchBar(){
+    function handleOnCleanSearchBar() {
         setSearchQuery('')
         setListSearch([])
         setShowSearch(false)
@@ -126,7 +128,7 @@ function Home({ navigation }) {
                 onChangeText={onChangeSearch}
                 value={searchQuery}
                 onClear={handleOnCleanSearchBar}
-                showLoading = {true}
+                showLoading={true}
             />
 
             {
@@ -135,10 +137,18 @@ function Home({ navigation }) {
                     data={listSearch}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
+                    horizontal={false}
+                    numColumns={2}
                 />
             }
 
+
             <ScrollView>
+                <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
+                    <Text style={styles.favorites}>Go to Favorites</Text>
+                </TouchableOpacity>
+
+                {loading && <ActivityIndicator />}
                 {!showSearch && listCategories.map((item, index) => (
                     <View key={index}>
 
@@ -157,9 +167,7 @@ function Home({ navigation }) {
                     </View>
                 ))}
             </ScrollView>
-            <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
-                <Text style={styles.label}>Favorites</Text>
-            </TouchableOpacity>
+
         </View>
 
     )

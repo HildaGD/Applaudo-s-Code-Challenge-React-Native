@@ -69,6 +69,14 @@ const styles = StyleSheet.create({
   title:{
     fontSize: 20,
     color: '#fff',
+  },
+  favorites:{
+    fontSize: 16,
+    color: '#fff',
+    padding: 15,
+    alignItems: 'center',
+    backgroundColor: '#960a00',
+    width: width
   }
 });
 
