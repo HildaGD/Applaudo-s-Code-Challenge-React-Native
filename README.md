@@ -1,5 +1,10 @@
 # Applaudo-s-Code-Challenge-React-Native
 
+Run project the next comands:
+
+cd android 
+gradlew clean && gradlew cleanBuildCache && adb reverse tcp:8081 tcp:8081 && adb devices
+
 Libraries have been used
 
 YARN https://yarnpkg.com/lang/en/docs/install/
