@@ -7,6 +7,7 @@ import listCategories from './listCategories'
 import styles from './styles'
 //import { Searchbar } from 'react-native-paper';
 import { SearchBar } from 'react-native-elements';
+import { set } from 'react-native-reanimated';
 function Home({ navigation }) {
     const [adventure, setAdventure] = useState([]);
     const [comedy, setComedy] = useState([]);
@@ -32,7 +33,7 @@ function Home({ navigation }) {
             const categoryComedy = await getCategory('Comedy')
             const categoryAction = await getCategory('Action')
             const categoryParody = await getCategory('Parody')
-            const categoryKids = await getCategory('Adventure')
+            const categoryKids = await getCategory('Kids')
             const categoryDrama = await getCategory('Drama')
             setAdventure(categoryAdventure.data)
             setComedy(categoryComedy.data)
@@ -109,7 +110,7 @@ function Home({ navigation }) {
         const searchList = await searchAnime(searchQuery)
         setListSearch(searchList.data)
 
-        console.log('anime encontrado', listSearch)
+        //console.log('anime encontrado', listSearch)
     };
 
     function handleOnCleanSearchBar() {
@@ -144,9 +145,13 @@ function Home({ navigation }) {
 
 
             <ScrollView>
-                <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
-                    <Text style={styles.favorites}>Go to Favorites</Text>
-                </TouchableOpacity>
+                {
+                    !showSearch &&
+                    <TouchableOpacity onPress={() => navigation.navigate('Favorite')}>
+                        <Text style={styles.favorites}>Go to Favorites</Text>
+                    </TouchableOpacity>
+                }
+
 
                 {loading && <ActivityIndicator />}
                 {!showSearch && listCategories.map((item, index) => (

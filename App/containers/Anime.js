@@ -17,7 +17,7 @@ function Anime(props) {
         const animation = props
 
         setAnime(animation)
-        console.log('anime escogido', animation.route)
+        //console.log('anime escogido', animation.route)
     }
 
     function getVideo() {

@@ -20,14 +20,7 @@ function Favorites({ navigation }) {
         try {
             let fav = await AsyncStorage.getItem("favoriteList")
             let favoriteSeriesFromLocalStorage = JSON.parse(fav) //|| "[]"
-            // setFavoritePictures(arrayOfPicturesFromLocalStorage)
-
-            // if (favoriteSeriesFromLocalStorage.length > 0) {
-            //     setDeleteAllPictures(true)
-            // } else {
-            //     setDeleteAllPictures(false)
-            // }
-            //dispatch({ type: SAVE_LIST_FAVORITES_ANIMES, favoriteSeriesList: favoriteSeriesFromLocalStorage });
+            
             console.log('favorites', favoriteSeriesFromLocalStorage)
             console.log('favorites use selector ', favoriteSeries)
             console.log('leght favorite series', favoriteSeries.length)

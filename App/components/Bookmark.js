@@ -19,7 +19,7 @@ function Bookmark(props) {
                 setFavorite(favorite)
                 await AsyncStorage.setItem('favoriteList', JSON.stringify(favorite))
                 dispatch({ type: SAVE_ANIME, seriesData: props })
-                console.log('serie is null')
+               // console.log('serie is null')
             } else {
                 let favoritesSeries = await JSON.parse(series) // || "[]"
                 let findSerieInFavoriteSeries = favoritesSeries.some(anime => anime.id === props.id);
@@ -33,7 +33,7 @@ function Bookmark(props) {
                     setFavorite(props)
                     await AsyncStorage.setItem('favoriteList', JSON.stringify(favoritesSeries))
                     let anime = await AsyncStorage.getItem('favoriteList')
-                    console.log(JSON.parse(anime))
+                    //console.log(JSON.parse(anime))
 
                     dispatch({ type: SAVE_ANIME, seriesData: props })
                     ToastAndroid.show("Save in Favorites", ToastAndroid.SHORT);
